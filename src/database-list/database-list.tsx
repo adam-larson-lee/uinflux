@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import DatabaseState from '../database-reducer/database-state';
 import list from '../database-actions/list';
 import DatabaseAction from '../database-actions/database-action';
+import env from '../env/env';
 
 interface DatabaseListProps {
   names: string[];
@@ -14,7 +15,7 @@ class DatabaseList extends React.Component<DatabaseListProps> {
   render() {
   
     if (!this.props.names.length) {
-      const influx = new InfluxDB('http://localhost:8086');
+      const influx = new InfluxDB(env.influxdb.address);
     
       const filterInternal = (databaseNames: string[]) => databaseNames.filter((name) => name !== '_internal');
       const logNames = (databaseNames: string[]) => {
