@@ -2,6 +2,7 @@ import React, { Dispatch } from 'react';
 import { connect } from 'react-redux';
 import { select } from '../database-actions/database-actions';
 import DatabaseAction from '../database-actions/database-action-interfaces';
+import influx from '../../influx/influx';
 
 interface DatabaseNameProps {
   name: string;
@@ -12,6 +13,20 @@ class DatabaseName extends React.Component<DatabaseNameProps> {
   render() {
 
     const selectDatabase = () => {
+      // influx.writeMeasurement(
+      //   'project',
+      //   [{
+      //     tags: {
+      //       name: 'solvere'
+      //     },
+      //     fields: {
+      //       velocity: 27,
+      //     },
+      //   }],
+      //   {
+      //     database: 'research-and-development'
+      //   }
+      // );
       this.props.dispatch(this.props.name);
     }
   

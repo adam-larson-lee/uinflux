@@ -1,2 +1,2 @@
-export const LIST = 'LIST';
-export const SELECT = 'SELECT';
+export const LIST = 'database/list';
+export const SELECT = 'database/select';

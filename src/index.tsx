@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import scanReducer from './database/database-reducer/database-reducer';
+import databaseReducer from './database/database-reducer/database-reducer';
+import measurementReducer from './measurement/measurement-reducer/measurement-reducer';
 
-const store = createStore(scanReducer);
+const rootReducer = combineReducers({
+  database: databaseReducer,
+  measurement: measurementReducer,
+});
+
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <React.StrictMode>
