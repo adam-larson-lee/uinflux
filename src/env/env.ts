@@ -10,8 +10,6 @@ function getEnvVar(key: string) {
   return process.env[`REACT_APP_${capitalize(splitWords(key)).join('_')}`];
 }
 
-console.log(process.env);
-
 export default {
   influxdb: {
     address: getEnvVar('influxdbAddress') || 'http://localhost:8086',

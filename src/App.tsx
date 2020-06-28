@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import DatabaseList from './database-list/database-list';
+import DatabaseList from './database/database-list/database-list';
 
 const App: React.FC<{}> = () => {
 

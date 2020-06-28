@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import scanReducer from './database-reducer/database-reducer';
+import scanReducer from './database/database-reducer/database-reducer';
 
 const store = createStore(scanReducer);
 
