@@ -19,7 +19,6 @@ class MeasurementList extends React.Component<MeasurementListProps> {
       influx
         .getMeasurements(this.props.selectedDatabase)
         .then((measurementNames) => {
-          console.log(measurementNames);
           this.props.dispatch(measurementNames)
         });
 
