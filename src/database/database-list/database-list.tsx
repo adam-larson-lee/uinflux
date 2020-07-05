@@ -1,37 +1,20 @@
 import React, { Dispatch } from 'react';
 import { connect } from 'react-redux';
-import { list } from '../database-actions/database-actions';
-import { List } from '../database-actions/database-action-interfaces';
-import DatabaseName from '../database-name/database-name';
 import State from '../../state/state';
-import influx from '../../influx/influx';
+import DatabaseAction from '../database-actions/database-action-interfaces';
+import { select } from '../database-actions/database-actions';
+import List from '../../list/list';
 
 interface DatabaseListProps {
   names: string[];
-  selected: string;
-  dispatch: (data: string[] | null) => void;
+  dispatch: (data: string) => void;
 };
 
 class DatabaseList extends React.Component<DatabaseListProps> {
   render() {
-  
-    if (!this.props.names.length) {
-    
-      const filterInternal = (databaseNames: string[]) => databaseNames.filter((name) => name !== '_internal');
-
-      influx
-        .getDatabaseNames()
-        .then(filterInternal)
-        .then((databaseNames) => {
-          this.props.dispatch(databaseNames)
-        });
-
-      return <div>loading...</div>;
-    } else {
-      return this.props.names.map((name) => <div style={{color: name === this.props.selected ? 'green' : 'black'}}>
-          <DatabaseName key={name} name={name}/>
-        </div>);
-    }
+    const removeInternal = (name: string) => name !== '_internal';
+    const toItem = (name: string) => ({id: name, text:name, onClick: () => this.props.dispatch(name)});
+    return <List items={this.props.names.filter(removeInternal).map(toItem)}></List>
   }
 }
 
@@ -42,8 +25,8 @@ const mapStateToProps = (store: State) => {
   };
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<List>) => ({
-  dispatch: (data: string[] | null) => dispatch(list(data))
+const mapDispatchToProps = (dispatch: Dispatch<DatabaseAction>) => ({
+  dispatch: (name: string) => dispatch(select(name))
 })
 
 export default connect(

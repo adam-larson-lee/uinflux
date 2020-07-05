@@ -1,43 +1,29 @@
 import React, { Dispatch } from 'react';
 import { connect } from 'react-redux';
-import { list } from '../measurement-actions/measurement-actions';
-import { List } from '../measurement-actions/measurement-action-interfaces';
-import MeasurementName from '../measurement-name/measurement-name';
+import { select } from '../measurement-actions/measurement-actions';
+import MeasurementAction from '../measurement-actions/measurement-action-interfaces';
 import State from '../../state/state';
-import influx from '../../influx/influx';
+import List from '../../list/list';
 
 interface MeasurementListProps {
-  selectedDatabase: string;
   names: string[];
-  dispatch: (data: string[] | null) => void;
+  dispatch: (data: string) => void;
 };
 
 class MeasurementList extends React.Component<MeasurementListProps> {
   render() {
-  
-    if (this.props.selectedDatabase && !this.props.names.length) {
-      influx
-        .getMeasurements(this.props.selectedDatabase)
-        .then((measurementNames) => {
-          this.props.dispatch(measurementNames)
-        });
-
-      return <div>loading...</div>;
-    } else {
-      return this.props.names.map((name) => <MeasurementName key={name} name={name} />);
-    }
+    const toItem = (name: string) => ({id: name, text:name, onClick: () => this.props.dispatch(name)});
+    return <List items={this.props.names.map(toItem)}></List>
   }
 }
 
 const mapStateToProps = (store: State) => ({
-  selectedDatabase: store.database.selected,
   names: store.measurement.names,
-  selected: store.measurement.selected,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<List>) => ({
-  dispatch: (data: string[] | null) => dispatch(list(data))
-})
+const mapDispatchToProps = (dispatch: Dispatch<MeasurementAction>) => ({
+  dispatch: (name: string) => dispatch(select(name))
+});
 
 export default connect(
   mapStateToProps,

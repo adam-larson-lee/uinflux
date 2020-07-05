@@ -1,35 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PointItem from '../point-item/point-item';
 import State from '../../state/state';
-import influx from '../../influx/influx';
 
-interface MeasurementListProps {
-  database: string;
-  measurement: string;
+interface PointListProps {
+  points: Object[];
 };
 
-class PointList extends React.Component<MeasurementListProps> {
+class PointList extends React.Component<PointListProps> {
   render() {
-  
-    if (this.props.database && this.props.measurement) {
-      influx
-        .query(`select * from ${this.props.measurement}`, {
-          database: this.props.database,
-        })
-        .then((results) => {
-          console.log(results);
-        });
-      return <div>we queried</div>
-    } else {
-      return <div>loading...</div>;
-    }
+    return <div>points list goes here</div>;
   }
 }
 
 const mapStateToProps = (store: State) => ({
-  database: store.database.selected,
-  measurement: store.measurement.selected,
+  points: [],
 });
 
 export default connect(

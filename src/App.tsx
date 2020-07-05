@@ -1,21 +1,21 @@
 import React from 'react';
 import './App.css';
-import DatabaseList from './database/database-list/database-list';
-import MeasurementList from './measurement/measurement-list/measurement-list';
-import PointList from './point/point-list/point-list';
+import PointLoader from './point/point-loader/point-loader';
+import DatabaseLoader from './database/database-loader/database-loader';
+import MeasurementLoader from './measurement/measurement-loader/measurement-loader';
 
 const App: React.FC<{}> = () => {
-
-
   return (
     <div className="App">
       <div>
-        <span>Databases:</span>
-        <DatabaseList/>
-        <span>Measurements:</span>
-        <MeasurementList/>
-        <span>Points:</span>
-        <PointList/>
+        <span><b>Databases:</b></span>
+        <DatabaseLoader/>
+        <br/>
+        <span><b>Measurements:</b></span>
+        <MeasurementLoader/>
+        <br/>
+        <span><b>Points:</b></span>
+        <PointLoader/>
       </div>
       <video></video>
     </div>
