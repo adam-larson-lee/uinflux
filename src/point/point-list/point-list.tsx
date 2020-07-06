@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import State from '../../state/state';
 
 interface PointListProps {
-  points: Object[];
+  points: unknown[];
 };
 
 class PointList extends React.Component<PointListProps> {
   render() {
-    return <div>points list goes here</div>;
+    return this.props.points.map((point) => {
+      const pointObject: object = point
+      Object.keys(<object>point)
+    });
   }
 }
 

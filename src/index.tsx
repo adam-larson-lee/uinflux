@@ -7,10 +7,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import databaseReducer from './database/database-reducer/database-reducer';
 import measurementReducer from './measurement/measurement-reducer/measurement-reducer';
+import pointReducer from './point/point-reducer/point-reducer';
 
 const rootReducer = combineReducers({
   database: databaseReducer,
   measurement: measurementReducer,
+  point: pointReducer,
 });
 
 const store = createStore(rootReducer);

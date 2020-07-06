@@ -2,7 +2,7 @@ import { LIST, SELECT } from './measurement-action-types';
 
 export interface List {
     type: typeof LIST,
-    result: Array<string> | null
+    result: string[] | null
 };
 
 export interface Select {
