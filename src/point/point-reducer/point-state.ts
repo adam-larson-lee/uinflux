@@ -1,5 +1,5 @@
 interface PointState {
-  points: object[];
+  points: { [key: string]: string }[];
 }
 
 export default PointState;
